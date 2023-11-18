@@ -31,9 +31,11 @@ struct ContentView: View {
                     Button(action: {
                         // TODO Search
                     }) {
-                        Image(systemName: "magnifyingglass")
-                            .imageScale(.large)
-                            .padding()
+                        NavigationLink(destination: SearchView()) {
+                            Image(systemName: "magnifyingglass")
+                                .imageScale(.large)
+                                .padding()
+                        }
                     }
                 }
                 .background(Color(UIColor.systemBackground))
