@@ -6,80 +6,46 @@ struct ContentView: View {
         center: CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868),
         span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
     )
-    @State private var isShowingSidebar = false
 
     var body: some View {
         NavigationView {
-            GeometryReader { geometry in
-                ZStack(alignment: .topLeading) {
-                    VStack(spacing: 0) {
-                        // Header
-                        HStack {
-                            Button(action: {
-                                withAnimation {
-                                    isShowingSidebar.toggle()
-                                }
-                            }) {
-                                Image(systemName: "line.horizontal.3")
-                                    .imageScale(.large)
-                                    .padding()
-                            }
-
-                            Spacer()
-
-                            Text("Landmark Finder")
-                                .font(.title)
-                                .fontWeight(.bold)
-
-                            Spacer()
-
-                            Image(systemName: "magnifyingglass")
-                                .imageScale(.large)
-                                .padding()
-                        }
-                        .padding(.top, UIApplication.shared.windows.first?.safeAreaInsets.top ?? 0)
-                        .background(Color(UIColor.systemBackground))
-                        .zIndex(1)
-
-                        // Map
-                        Map(coordinateRegion: $region)
-                            .edgesIgnoringSafeArea(.bottom)
+            VStack(spacing: 0) {
+                // Header
+                HStack {
+                    Button(action: {
+                        // TODO Save Locations
+                    }) {
+                        Image(systemName: "line.horizontal.3")
+                            .imageScale(.large)
+                            .padding()
                     }
 
-                    // Transparent background for dismissing the sidebar
-                    if isShowingSidebar {
-                        Color.black.opacity(0.4)
-                            .edgesIgnoringSafeArea(.all)
-                            .onTapGesture {
-                                withAnimation {
-                                    isShowingSidebar = false
-                                }
-                            }
-                            .zIndex(0) // Ensures the overlay is below the sidebar
-                    }
+                    Spacer()
 
-                    // Sidebar
-                    if isShowingSidebar {
-                        SidebarView()
-                            .frame(width: geometry.size.width / 2)
-                            .transition(.move(edge: .leading))
-                            .background(Color(UIColor.systemBackground))
-                            .zIndex(1) // Ensure the sidebar is above the overlay
+                    Text("Landmark Finder")
+                        .font(.title)
+                        .fontWeight(.bold)
+
+                    Spacer()
+
+                    Button(action: {
+                        // TODO Search
+                    }) {
+                        Image(systemName: "magnifyingglass")
+                            .imageScale(.large)
+                            .padding()
                     }
                 }
-            }
-            .navigationBarHidden(true)
-        }
-        .navigationViewStyle(StackNavigationViewStyle())
-    }
-}
+                .background(Color(UIColor.systemBackground))
+                .padding(.top, 16)
+                .zIndex(1)
 
-struct SidebarView: View {
-    var body: some View {
-        List {
-            Text("Saved Locations")
+                // Map
+                Map(coordinateRegion: $region)
+                    .edgesIgnoringSafeArea(.bottom)
+            }
         }
-        .listStyle(SidebarListStyle())
+        .navigationBarHidden(true)
     }
 }
 
@@ -88,6 +54,9 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+
+
 
 
 
