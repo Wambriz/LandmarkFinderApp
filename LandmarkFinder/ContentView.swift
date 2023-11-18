@@ -1,11 +1,11 @@
 import SwiftUI
 import MapKit
+import CoreLocation
 
 struct ContentView: View {
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868),
-        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-    )
+    
+    @StateObject private var locationManager = LocationManager()
+    
 
     var body: some View {
         NavigationView {
@@ -41,8 +41,9 @@ struct ContentView: View {
                 .zIndex(1)
 
                 // Map
-                Map(coordinateRegion: $region)
+                Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
                     .edgesIgnoringSafeArea(.bottom)
+                    .accentColor(Color(.systemPink))
             }
         }
         .navigationBarHidden(true)
