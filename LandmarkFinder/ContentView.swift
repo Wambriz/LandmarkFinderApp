@@ -44,8 +44,8 @@ struct ContentView: View {
 
                 // Map
                 Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
-                    .edgesIgnoringSafeArea(.bottom)
-                    .accentColor(Color(.systemPink))
+                            .edgesIgnoringSafeArea(.bottom)
+                            .accentColor(Color(.systemPink))
             }
         }
         .navigationBarHidden(true)

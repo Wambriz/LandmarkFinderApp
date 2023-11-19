@@ -4,13 +4,14 @@ import MapKit
 
 class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     private var locationManager = CLLocationManager()
+    private var initialLocationSet = false  // New flag to track the initial location update
     
     @Published var userLocation: CLLocationCoordinate2D?
     @Published var authorizationStatus: CLAuthorizationStatus?
     @Published var region = MKCoordinateRegion(
-            center: CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868),
-            span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
-        )
+        center: CLLocationCoordinate2D(latitude: 34.011286, longitude: -116.166868),
+        span: MKCoordinateSpan(latitudeDelta: 0.2, longitudeDelta: 0.2)
+    )
     
     override init() {
         super.init()
@@ -19,7 +20,7 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         self.locationManager.requestWhenInUseAuthorization()
     }
     
-    //CLLocationManagerDelegate Methods
+    // CLLocationManagerDelegate Methods
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         switch status {
@@ -38,16 +39,26 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last?.coordinate {
             self.userLocation = location
-            self.region.center = location
+            if !initialLocationSet {
+                self.region.center = location
+                initialLocationSet = true
+            }
         }
     }
     
     func printCurrentLocation() {
-            if let location = userLocation {
-                print("Current Location: Latitude \(location.latitude), Longitude \(location.longitude)")
-            } else {
-                print("Current Location: Not available")
-            }
+        if let location = userLocation {
+            print("Current Location: Latitude \(location.latitude), Longitude \(location.longitude)")
+        } else {
+            print("Current Location: Not available")
         }
+    }
+    
+    struct Landmark: Identifiable {
+        var id = UUID()
+        var name: String
+        var location: CLLocationCoordinate2D
+    }
 }
+
 
