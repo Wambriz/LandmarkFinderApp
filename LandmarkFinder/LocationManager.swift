@@ -54,6 +54,29 @@ class LocationManager: NSObject, ObservableObject, CLLocationManagerDelegate {
         }
     }
     
+    func searchNearby(for query: String, completion: @escaping ([MKMapItem]) -> Void) {
+            guard let userLocation = userLocation else {
+                print("User location is not available")
+                completion([])
+                return
+            }
+
+            let request = MKLocalSearch.Request()
+            request.naturalLanguageQuery = query
+            request.region = MKCoordinateRegion(center: userLocation, latitudinalMeters: 5000, longitudinalMeters: 5000)
+
+            let search = MKLocalSearch(request: request)
+            search.start { (response, error) in
+                guard let response = response else {
+                    print("There was an error searching for: \(query) error: \(error?.localizedDescription ?? "Unknown error").")
+                    completion([])
+                    return
+                }
+
+                completion(response.mapItems)
+            }
+        }
+    
     struct Landmark: Identifiable {
         var id = UUID()
         var name: String
