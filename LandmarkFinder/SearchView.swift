@@ -1,7 +1,7 @@
 import SwiftUI
 import MapKit
 
-// Wrapper for MKMapItem to conform to Identifiable
+// Wrapper for MKMapItem to Identifiable
 struct IdentifiableMapItem: Identifiable {
     let id = UUID()
     let mapItem: MKMapItem
@@ -10,48 +10,64 @@ struct IdentifiableMapItem: Identifiable {
 struct SearchView: View {
     @State private var searchText = ""
     @StateObject private var locationManager = LocationManager()
-    @State private var searchResults = [IdentifiableMapItem]()  
+    @State private var searchResults = [IdentifiableMapItem]()
     @State private var selectedPlace: IdentifiableMapItem?
+    @State private var isNavigatingToDirections = false
+    @State private var destinationCoordinate: CLLocationCoordinate2D?
 
     var body: some View {
-        VStack {
-            // Search Bar
-            TextField("Search landmarks", text: $searchText)
-                .padding()
-                .background(Color(.systemGray6))
-                .cornerRadius(10)
-                .padding()
-                .onChange(of: searchText) { newValue in
-                    performSearch(query: newValue)
-                }
-
-            // Splitting screen for results and map
-            GeometryReader { geometry in
-                VStack(spacing: 0) {
-                    // Search Results
-                    List(searchResults, id: \.id) { item in
-                        VStack(alignment: .leading) {
-                            Text(item.mapItem.name ?? "Unknown")
-                            Text(item.mapItem.placemark.title ?? "")
-                                .font(.subheadline)
-                                .foregroundColor(.gray)
-                        }
-                        .onTapGesture {
-                            centerMapOnLocation(location: item.mapItem.placemark.coordinate)
-                        }
+ 
+            VStack {
+                TextField("Search landmarks", text: $searchText)
+                    .padding()
+                    .background(Color(.systemGray6))
+                    .cornerRadius(10)
+                    .padding()
+                    .onChange(of: searchText) { newValue in
+                        performSearch(query: newValue)
                     }
-                    .frame(height: geometry.size.height / 2)
 
-                    // Map View with Annotation
-                    Map(coordinateRegion: $locationManager.region,
-                        annotationItems: selectedPlace != nil ? [selectedPlace!] : []) { place in
-                        MapPin(coordinate: place.mapItem.placemark.coordinate)
+                GeometryReader { geometry in
+                    VStack(spacing: 0) {
+                        List(searchResults, id: \.id) { item in
+                            HStack {
+                                VStack(alignment: .leading) {
+                                    Text(item.mapItem.name ?? "Unknown")
+                                    Text(item.mapItem.placemark.title ?? "")
+                                        .font(.subheadline)
+                                        .foregroundColor(.gray)
+                                }
+                                Spacer()
+
+                                NavigationLink(destination: DirectionsView(startCoordinate: locationManager.userLocation ?? CLLocationCoordinate2D(),
+                                                                           endCoordinate: item.mapItem.placemark.coordinate),
+                                               isActive: $isNavigatingToDirections) {
+                                    EmptyView()
+                                }
+                                .hidden()
+
+                                Button("Directions") {
+                                    destinationCoordinate = item.mapItem.placemark.coordinate
+                                    isNavigatingToDirections = true
+                                }
+                                .buttonStyle(.bordered)
+                            }
+                            .onTapGesture {
+                                centerMapOnLocation(location: item.mapItem.placemark.coordinate)
+                            }
+                        }
+                        .frame(height: geometry.size.height / 2)
+
+                        Map(coordinateRegion: $locationManager.region,
+                            annotationItems: selectedPlace != nil ? [selectedPlace!] : []) { place in
+                            MapPin(coordinate: place.mapItem.placemark.coordinate)
+                        }
+                        .frame(height: geometry.size.height / 1.81)
                     }
-                    .frame(height: geometry.size.height / 1.81)
                 }
             }
-        }
-        .navigationBarTitle("Search Landmarks", displayMode: .inline)
+            .navigationBarTitle("Search Landmarks", displayMode: .inline)
+        
     }
 
     private func performSearch(query: String) {
@@ -78,6 +94,8 @@ struct SearchView_Previews: PreviewProvider {
         SearchView()
     }
 }
+
+
 
 
 
