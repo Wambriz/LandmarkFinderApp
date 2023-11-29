@@ -18,13 +18,15 @@ struct DirectionsView: View {
     }
 
     var body: some View {
-        Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: [startCoordinate, endCoordinate]) { location in
-            MapPin(coordinate: location, tint: .red)
+        VStack(spacing: 0) {
+            Map(coordinateRegion: $region, showsUserLocation: true, annotationItems: [startCoordinate, endCoordinate]) { location in
+                MapPin(coordinate: location, tint: .red)
+            }
+            .overlay(
+                RouteView(route: $route)
+            )
+            .edgesIgnoringSafeArea([.horizontal, .bottom])
         }
-        .overlay(
-            RouteView(route: $route)
-                .edgesIgnoringSafeArea(.all)
-        )
         .onAppear {
             calculateRoute()
         }
@@ -99,5 +101,7 @@ extension CLLocationCoordinate2D: Identifiable {
         "\(latitude),\(longitude)"
     }
 }
+
+
 
 
