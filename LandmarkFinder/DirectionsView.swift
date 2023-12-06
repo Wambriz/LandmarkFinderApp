@@ -33,21 +33,21 @@ struct DirectionsView: View {
                 RouteView(route: $route)
             )
             .edgesIgnoringSafeArea([.horizontal, .bottom])
-
+            
             Spacer()
-
+            
             Button(action: {
                 isFavorited.toggle()
                 if isFavorited {
                     landmarkVM.addFavoriteLandmark(landmark: currentLandmark)
-                    showAlert = true  // Show alert when favorited
+                    showAlert = true
                 } else {
                     landmarkVM.removeFavoriteLandmark(landmarkId: currentLandmark.id)
                 }
             }) {
                 Image(systemName: isFavorited ? "heart.fill" : "heart")
-                    .resizable()  // Make the heart icon resizable
-                    .frame(width: 40, height: 40)  // Set a larger size for the icon
+                    .resizable()
+                    .frame(width: 40, height: 40)
                     .foregroundColor(isFavorited ? .red : .gray)
             }
             .padding()
@@ -60,7 +60,7 @@ struct DirectionsView: View {
         }
         .navigationBarTitle(currentLandmark.name, displayMode: .inline)
     }
-
+    
     
     
     

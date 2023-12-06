@@ -5,7 +5,7 @@ import CoreLocation
 struct ContentView: View {
     @StateObject private var locationManager = LocationManager()
     @State private var showingLandmarkList = false
-
+    
     var body: some View {
         NavigationView {
             VStack(spacing: 0) {
@@ -19,15 +19,15 @@ struct ContentView: View {
                                 .padding()
                         }
                     }
-
+                    
                     Spacer()
-
+                    
                     Text("Landmark Finder")
                         .font(.title)
                         .fontWeight(.bold)
-
+                    
                     Spacer()
-
+                    
                     NavigationLink(destination: SearchView()) {
                         Image(systemName: "magnifyingglass")
                             .imageScale(.large)
@@ -37,7 +37,7 @@ struct ContentView: View {
                 .background(Color(UIColor.systemBackground))
                 .padding(.top, 16)
                 .zIndex(1)
-
+                
                 Map(coordinateRegion: $locationManager.region, showsUserLocation: true)
                     .edgesIgnoringSafeArea(.bottom)
                     .accentColor(Color(.systemPink))

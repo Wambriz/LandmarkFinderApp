@@ -3,7 +3,7 @@ import SwiftUI
 struct LandmarksListView: View {
     @StateObject private var landmarkVM = LandmarkViewModel()
     @State private var landmarks = [Landmark]()
-
+    
     var body: some View {
         NavigationView {
             List {
@@ -29,7 +29,7 @@ struct LandmarksListView: View {
             }
         }
     }
-
+    
     private func removeLandmark(_ landmark: Landmark) {
         landmarkVM.removeFavoriteLandmark(landmarkId: landmark.id)
         landmarks.removeAll { $0.id == landmark.id }
