@@ -6,10 +6,19 @@ struct LandmarksListView: View {
 
     var body: some View {
         NavigationView {
-            List(landmarks, id: \.id) { landmark in
-                VStack(alignment: .leading) {
-                    Text(landmark.name).font(.headline)
-                    Text(landmark.address).font(.subheadline)
+            List {
+                ForEach(landmarks, id: \.id) { landmark in
+                    VStack(alignment: .leading) {
+                        Text(landmark.name).font(.headline)
+                        Text(landmark.address).font(.subheadline)
+                    }
+                    .swipeActions {
+                        Button(role: .destructive) {
+                            removeLandmark(landmark)
+                        } label: {
+                            Label("Remove", systemImage: "trash")
+                        }
+                    }
                 }
             }
             .navigationBarTitle("Saved Landmarks", displayMode: .inline)
@@ -20,6 +29,12 @@ struct LandmarksListView: View {
             }
         }
     }
+
+    private func removeLandmark(_ landmark: Landmark) {
+        landmarkVM.removeFavoriteLandmark(landmarkId: landmark.id)
+        landmarks.removeAll { $0.id == landmark.id }
+    }
 }
+
 
 

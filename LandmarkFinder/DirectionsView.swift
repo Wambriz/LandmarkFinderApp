@@ -12,6 +12,8 @@ struct DirectionsView: View {
     
     var currentLandmark: Landmark
     
+    @State private var showAlert = false
+    
     init(startCoordinate: CLLocationCoordinate2D, endCoordinate: CLLocationCoordinate2D, currentLandmark: Landmark) {
         self.startCoordinate = startCoordinate
         self.endCoordinate = endCoordinate
@@ -31,27 +33,34 @@ struct DirectionsView: View {
                 RouteView(route: $route)
             )
             .edgesIgnoringSafeArea([.horizontal, .bottom])
-            
+
             Spacer()
-            
+
             Button(action: {
                 isFavorited.toggle()
                 if isFavorited {
                     landmarkVM.addFavoriteLandmark(landmark: currentLandmark)
+                    showAlert = true  // Show alert when favorited
                 } else {
                     landmarkVM.removeFavoriteLandmark(landmarkId: currentLandmark.id)
                 }
             }) {
                 Image(systemName: isFavorited ? "heart.fill" : "heart")
+                    .resizable()  // Make the heart icon resizable
+                    .frame(width: 40, height: 40)  // Set a larger size for the icon
                     .foregroundColor(isFavorited ? .red : .gray)
             }
             .padding()
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Saved"), message: Text("Landmark has been saved to favorites."))
+            }
         }
         .onAppear {
             calculateRoute()
         }
-        .navigationBarTitle(currentLandmark.name, displayMode: .inline) // Set dynamic title
+        .navigationBarTitle(currentLandmark.name, displayMode: .inline)
     }
+
     
     
     
