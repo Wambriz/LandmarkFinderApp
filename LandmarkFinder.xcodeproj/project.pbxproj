@@ -14,6 +14,12 @@
 		30B3195C2B085FA5005EEB70 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3195B2B085FA5005EEB70 /* LocationManager.swift */; };
 		30B3195F2B08786D005EEB70 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30B3195E2B08786D005EEB70 /* SearchView.swift */; };
 		30DA78BB2B15709500C5A3BA /* DirectionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DA78BA2B15709500C5A3BA /* DirectionsView.swift */; };
+		30DEDBF82B1FEB9000CC1447 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 30DEDBF72B1FEB9000CC1447 /* GoogleService-Info.plist */; };
+		30DEDC0D2B1FED6900CC1447 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 30DEDC0C2B1FED6900CC1447 /* FirebaseDatabase */; };
+		30DEDC0F2B1FED6900CC1447 /* FirebaseDatabaseSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 30DEDC0E2B1FED6900CC1447 /* FirebaseDatabaseSwift */; };
+		30DEDC132B1FED6900CC1447 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 30DEDC122B1FED6900CC1447 /* FirebaseFirestore */; };
+		30DEDC172B1FED6900CC1447 /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 30DEDC162B1FED6900CC1447 /* FirebaseFirestoreSwift */; };
+		30DEDC312B1FF60300CC1447 /* LandmarkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 30DEDC302B1FF60300CC1447 /* LandmarkViewModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +32,8 @@
 		30B3195D2B086354005EEB70 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		30B3195E2B08786D005EEB70 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
 		30DA78BA2B15709500C5A3BA /* DirectionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DirectionsView.swift; sourceTree = "<group>"; };
+		30DEDBF72B1FEB9000CC1447 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		30DEDC302B1FF60300CC1447 /* LandmarkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LandmarkViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +41,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				30DEDC0D2B1FED6900CC1447 /* FirebaseDatabase in Frameworks */,
+				30DEDC132B1FED6900CC1447 /* FirebaseFirestore in Frameworks */,
+				30DEDC172B1FED6900CC1447 /* FirebaseFirestoreSwift in Frameworks */,
+				30DEDC0F2B1FED6900CC1447 /* FirebaseDatabaseSwift in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -60,10 +72,12 @@
 			children = (
 				30DA78BA2B15709500C5A3BA /* DirectionsView.swift */,
 				30B3195E2B08786D005EEB70 /* SearchView.swift */,
+				30DEDC302B1FF60300CC1447 /* LandmarkViewModel.swift */,
 				30B3195D2B086354005EEB70 /* Info.plist */,
 				30B3195B2B085FA5005EEB70 /* LocationManager.swift */,
 				30B3194B2B0844A3005EEB70 /* LandmarkFinderApp.swift */,
 				30B3194D2B0844A3005EEB70 /* ContentView.swift */,
+				30DEDBF72B1FEB9000CC1447 /* GoogleService-Info.plist */,
 				30B3194F2B0844A5005EEB70 /* Assets.xcassets */,
 				30B319512B0844A5005EEB70 /* Preview Content */,
 			);
@@ -94,6 +108,12 @@
 			dependencies = (
 			);
 			name = LandmarkFinder;
+			packageProductDependencies = (
+				30DEDC0C2B1FED6900CC1447 /* FirebaseDatabase */,
+				30DEDC0E2B1FED6900CC1447 /* FirebaseDatabaseSwift */,
+				30DEDC122B1FED6900CC1447 /* FirebaseFirestore */,
+				30DEDC162B1FED6900CC1447 /* FirebaseFirestoreSwift */,
+			);
 			productName = LandmarkFinder;
 			productReference = 30B319482B0844A3005EEB70 /* LandmarkFinder.app */;
 			productType = "com.apple.product-type.application";
@@ -122,6 +142,9 @@
 				Base,
 			);
 			mainGroup = 30B3193F2B0844A3005EEB70;
+			packageReferences = (
+				30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			productRefGroup = 30B319492B0844A3005EEB70 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,6 +161,7 @@
 			files = (
 				30B319532B0844A5005EEB70 /* Preview Assets.xcassets in Resources */,
 				30B319502B0844A5005EEB70 /* Assets.xcassets in Resources */,
+				30DEDBF82B1FEB9000CC1447 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +176,7 @@
 				30B3194E2B0844A3005EEB70 /* ContentView.swift in Sources */,
 				30DA78BB2B15709500C5A3BA /* DirectionsView.swift in Sources */,
 				30B3194C2B0844A3005EEB70 /* LandmarkFinderApp.swift in Sources */,
+				30DEDC312B1FF60300CC1447 /* LandmarkViewModel.swift in Sources */,
 				30B3195C2B085FA5005EEB70 /* LocationManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -360,6 +385,40 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.19.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		30DEDC0C2B1FED6900CC1447 /* FirebaseDatabase */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabase;
+		};
+		30DEDC0E2B1FED6900CC1447 /* FirebaseDatabaseSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseDatabaseSwift;
+		};
+		30DEDC122B1FED6900CC1447 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		30DEDC162B1FED6900CC1447 /* FirebaseFirestoreSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 30DEDBF92B1FED6900CC1447 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestoreSwift;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 30B319402B0844A3005EEB70 /* Project object */;
 }

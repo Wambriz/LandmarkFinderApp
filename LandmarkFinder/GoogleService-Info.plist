@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>API_KEY</key>
+	<string>AIzaSyBs_VqqzSaULE23GCDwekbT-IljMhXT5bc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1097931701825</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>willster.LandmarkFinder</string>
+	<key>PROJECT_ID</key>
+	<string>landmarkfinderapp</string>
+	<key>STORAGE_BUCKET</key>
+	<string>landmarkfinderapp.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1097931701825:ios:d9741626f4a2460c7e50c0</string>
+</dict>
+</plist>
